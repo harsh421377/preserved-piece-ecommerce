@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order Confirmation - Preserved Piece</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #FAF8F5;
+      color: #44403C;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: #FFFFFF;
+    }
+    .header {
+      background-color: #F5F0E8;
+      padding: 40px 20px;
+      text-align: center;
+      border-bottom: 1px solid #E7E5E4;
+    }
+    .logo {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 28px;
+      color: #78716C;
+      letter-spacing: 2px;
+      margin: 0;
+    }
+    .tagline {
+      font-size: 12px;
+      color: #A8A29E;
+      letter-spacing: 1px;
+      margin-top: 8px;
+    }
+    .content {
+      padding: 40px 30px;
+    }
+    .greeting {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 24px;
+      color: #78716C;
+      margin-bottom: 20px;
+    }
+    .message {
+      font-size: 15px;
+      line-height: 1.7;
+      color: #57534E;
+      margin-bottom: 30px;
+    }
+    .order-box {
+      background-color: #FAF8F5;
+      border: 1px solid #E7E5E4;
+      border-radius: 8px;
+      padding: 25px;
+      margin-bottom: 30px;
+    }
+    .order-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #E7E5E4;
+      padding-bottom: 15px;
+      margin-bottom: 20px;
+    }
+    .order-number {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 18px;
+      color: #78716C;
+    }
+    .order-date {
+      font-size: 13px;
+      color: #A8A29E;
+    }
+    .product-item {
+      display: flex;
+      gap: 15px;
+      padding: 15px 0;
+      border-bottom: 1px solid #E7E5E4;
+    }
+    .product-item:last-of-type {
+      border-bottom: none;
+    }
+    .product-image {
+      width: 80px;
+      height: 80px;
+      background-color: #F5F0E8;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #A8A29E;
+      font-size: 12px;
+    }
+    .product-details {
+      flex: 1;
+    }
+    .product-name {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 16px;
+      color: #44403C;
+      margin-bottom: 5px;
+    }
+    .product-variant {
+      font-size: 13px;
+      color: #78716C;
+      margin-bottom: 5px;
+    }
+    .product-qty {
+      font-size: 13px;
+      color: #A8A29E;
+    }
+    .product-price {
+      font-size: 15px;
+      color: #44403C;
+      font-weight: 500;
+    }
+    .totals {
+      margin-top: 20px;
+      padding-top: 15px;
+      border-top: 1px solid #E7E5E4;
+    }
+    .total-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      font-size: 14px;
+      color: #57534E;
+    }
+    .total-row.final {
+      border-top: 1px solid #E7E5E4;
+      margin-top: 10px;
+      padding-top: 15px;
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 18px;
+      color: #44403C;
+    }
+    .shipping-box {
+      background-color: #FAF8F5;
+      border: 1px solid #E7E5E4;
+      border-radius: 8px;
+      padding: 25px;
+      margin-bottom: 30px;
+    }
+    .section-title {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 16px;
+      color: #78716C;
+      margin-bottom: 15px;
+    }
+    .address {
+      font-size: 14px;
+      line-height: 1.6;
+      color: #57534E;
+    }
+    .cta-button {
+      display: inline-block;
+      background-color: #78716C;
+      color: #FFFFFF;
+      text-decoration: none;
+      padding: 14px 35px;
+      border-radius: 6px;
+      font-size: 14px;
+      letter-spacing: 1px;
+      margin-top: 10px;
+    }
+    .cta-button:hover {
+      background-color: #57534E;
+    }
+    .whatsapp-box {
+      background-color: #F0FDF4;
+      border: 1px solid #BBF7D0;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+    .whatsapp-text {
+      font-size: 14px;
+      color: #166534;
+      margin-bottom: 10px;
+    }
+    .whatsapp-link {
+      color: #15803D;
+      font-weight: 500;
+      text-decoration: none;
+    }
+    .footer {
+      background-color: #44403C;
+      padding: 40px 30px;
+      text-align: center;
+    }
+    .footer-logo {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 20px;
+      color: #D6D3D1;
+      letter-spacing: 2px;
+      margin-bottom: 15px;
+    }
+    .footer-links {
+      margin-bottom: 20px;
+    }
+    .footer-links a {
+      color: #A8A29E;
+      text-decoration: none;
+      font-size: 13px;
+      margin: 0 12px;
+    }
+    .footer-links a:hover {
+      color: #D6D3D1;
+    }
+    .social-links {
+      margin-bottom: 20px;
+    }
+    .social-links a {
+      display: inline-block;
+      width: 36px;
+      height: 36px;
+      background-color: #57534E;
+      border-radius: 50%;
+      margin: 0 6px;
+      line-height: 36px;
+      color: #D6D3D1;
+      text-decoration: none;
+      font-size: 12px;
+    }
+    .copyright {
+      font-size: 12px;
+      color: #78716C;
+    }
+    @media only screen and (max-width: 600px) {
+      .content {
+        padding: 30px 20px;
+      }
+      .order-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+      }
+      .product-item {
+        flex-direction: column;
+        text-align: center;
+      }
+      .product-image {
+        margin: 0 auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <div class="header">
+      <h1 class="logo">PRESERVED PIECE</h1>
+      <p class="tagline">MOMENTS, PRESERVED FOREVER</p>
+    </div>
+
+    <!-- Content -->
+    <div class="content">
+      <h2 class="greeting">Thank You for Your Order!</h2>
+      <p class="message">
+        Dear {{customer_name}},<br><br>
+        Your order has been confirmed and our artisans will begin crafting your precious piece with love and care. Each item is handcrafted especially for you, preserving your cherished memories in beautiful resin art.
+      </p>
+
+      <!-- Order Details -->
+      <div class="order-box">
+        <div class="order-header">
+          <span class="order-number">Order #{{order_number}}</span>
+          <span class="order-date">{{order_date}}</span>
+        </div>
+
+        <!-- Product Items -->
+        <div class="product-item">
+          <div class="product-image">80x80</div>
+          <div class="product-details">
+            <div class="product-name">Rose Petal Resin Pendant</div>
+            <div class="product-variant">Gold Chain / Heart Shape</div>
+            <div class="product-qty">Qty: 1</div>
+          </div>
+          <div class="product-price">₹1,499</div>
+        </div>
+
+        <div class="product-item">
+          <div class="product-image">80x80</div>
+          <div class="product-details">
+            <div class="product-name">Custom Photo Keychain</div>
+            <div class="product-variant">Rectangle / Clear Resin</div>
+            <div class="product-qty">Qty: 2</div>
+          </div>
+          <div class="product-price">₹1,198</div>
+        </div>
+
+        <!-- Totals -->
+        <div class="totals">
+          <div class="total-row">
+            <span>Subtotal</span>
+            <span>₹2,697</span>
+          </div>
+          <div class="total-row">
+            <span>Shipping</span>
+            <span>FREE</span>
+          </div>
+          <div class="total-row">
+            <span>Gift Wrapping</span>
+            <span>₹99</span>
+          </div>
+          <div class="total-row final">
+            <span>Total</span>
+            <span>₹2,796</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Shipping Address -->
+      <div class="shipping-box">
+        <h3 class="section-title">Shipping Address</h3>
+        <p class="address">
+          {{customer_name}}<br>
+          {{address_line_1}}<br>
+          {{address_line_2}}<br>
+          {{city}}, {{state}} - {{pincode}}<br>
+          Phone: {{phone}}
+        </p>
+      </div>
+
+      <!-- Estimated Delivery -->
+      <div class="shipping-box">
+        <h3 class="section-title">Estimated Delivery</h3>
+        <p class="address">
+          <strong>Ready-made items:</strong> 5-7 business days<br>
+          <strong>Custom orders:</strong> 10-15 business days<br><br>
+          You will receive tracking details once your order is shipped.
+        </p>
+      </div>
+
+      <!-- Track Order CTA -->
+      <div style="text-align: center; margin-bottom: 30px;">
+        <a href="{{tracking_url}}" class="cta-button">TRACK YOUR ORDER</a>
+      </div>
+
+      <!-- WhatsApp Support -->
+      <div class="whatsapp-box">
+        <p class="whatsapp-text">Questions about your order?</p>
+        <a href="https://wa.me/919876543210?text=Hi!%20I%20have%20a%20question%20about%20order%20{{order_number}}" class="whatsapp-link">
+          Chat with us on WhatsApp
+        </a>
+      </div>
+
+      <p class="message" style="text-align: center; font-style: italic;">
+        "Every piece we create carries a story. Thank you for letting us be a part of yours."
+      </p>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <div class="footer-logo">PRESERVED PIECE</div>
+      <div class="footer-links">
+        <a href="{{site_url}}/shop">Shop</a>
+        <a href="{{site_url}}/custom-order">Custom Order</a>
+        <a href="{{site_url}}/contact">Contact</a>
+        <a href="{{site_url}}/policies">Policies</a>
+      </div>
+      <div class="social-links">
+        <a href="#">IG</a>
+        <a href="#">FB</a>
+        <a href="#">PIN</a>
+      </div>
+      <p class="copyright">
+        © 2026 Preserved Piece. All rights reserved.<br>
+        Mumbai, India
+      </p>
+    </div>
+  </div>
+</body>
+</html>
