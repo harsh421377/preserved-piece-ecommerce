@@ -9,36 +9,23 @@ export async function GET() {
     const now = new Date()
     const todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate())
 
-    const [
-      totalOrders,
-      pendingOrders,
-      totalProducts,
-      totalMessages,
-      revenueAgg,
-      todayOrdersAgg,
-      recentOrders,
-      orderStatusGroups,
-      totalCustomOrders,
-      pendingCustomOrders,
-    ] = await Promise.all([
-      prisma.order.count(),
-      prisma.order.count({ where: { status: "PENDING" } }),
-      prisma.product.count(),
-      prisma.contactMessage.count({ where: { read: false } }),
-      prisma.order.aggregate({ _sum: { total: true }, where: { status: { not: "CANCELLED" } } }),
-      prisma.order.count({ where: { createdAt: { gte: todayStart } } }),
-      prisma.order.findMany({
-        take: 5,
-        orderBy: { createdAt: "desc" },
-        include: { items: { include: { product: true } } },
-      }),
-      prisma.order.groupBy({
-        by: ["status"],
-        _count: { status: true }
-      }),
-      prisma.customOrderRequest.count(),
-      prisma.customOrderRequest.count({ where: { status: "PENDING" } }),
-    ])
+    const totalOrders = await prisma.order.count()
+    const pendingOrders = await prisma.order.count({ where: { status: "PENDING" } })
+    const totalProducts = await prisma.product.count()
+    const totalMessages = await prisma.contactMessage.count({ where: { read: false } })
+    const revenueAgg = await prisma.order.aggregate({ _sum: { total: true }, where: { status: { not: "CANCELLED" } } })
+    const todayOrdersAgg = await prisma.order.count({ where: { createdAt: { gte: todayStart } } })
+    const recentOrders = await prisma.order.findMany({
+      take: 5,
+      orderBy: { createdAt: "desc" },
+      include: { items: { include: { product: true } } },
+    })
+    const orderStatusGroups = await prisma.order.groupBy({
+      by: ["status"],
+      _count: { status: true }
+    })
+    const totalCustomOrders = await prisma.customOrderRequest.count()
+    const pendingCustomOrders = await prisma.customOrderRequest.count({ where: { status: "PENDING" } })
 
     return NextResponse.json({
       totalOrders,
