@@ -29,11 +29,24 @@ export default {
     ],
 
     pages: {
-        signIn: "/admin/login",
+        signIn: "/admin-login",
     },
 
     callbacks: {
-        authorized() {
+        authorized({ auth, request: { nextUrl } }) {
+            const isAdmin = auth?.user?.role === "admin"
+
+            const isAdminRoute = nextUrl.pathname.startsWith("/admin")
+            const isLoginPage = nextUrl.pathname === "/admin-login"
+
+            if (isAdminRoute) {
+                return isAdmin
+            }
+
+            if (isLoginPage && isAdmin) {
+                return Response.redirect(new URL("/admin", nextUrl))
+            }
+
             return true
         },
 
