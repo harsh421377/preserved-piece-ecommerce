@@ -33,25 +33,7 @@ export default {
     },
 
     callbacks: {
-        authorized({ auth, request: { nextUrl } }) {
-            const isLoggedIn = !!auth?.user
-            const isOnAdmin = nextUrl.pathname.startsWith("/admin")
-            const isOnAdminLogin = nextUrl.pathname === "/admin/login"
-
-            if (isOnAdmin) {
-                if (isOnAdminLogin) {
-                    // If already logged in as admin, redirect to admin dashboard
-                    if (isLoggedIn && auth?.user?.role === "admin") {
-                        return Response.redirect(new URL("/admin", nextUrl))
-                    }
-                    return true // Allow access to login page
-                }
-                // Enforce admin login for all other admin routes
-                if (isLoggedIn && auth?.user?.role === "admin") {
-                    return true
-                }
-                return false // Redirects to pages.signIn
-            }
+        authorized() {
             return true
         },
 
